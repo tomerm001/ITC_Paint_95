@@ -1,0 +1,129 @@
+
+
+/*=============== MAIN ===================*/
+body {
+    background-color: papayawhip ;
+    width: 3000px;
+    overflow-x: scroll;
+    padding: 0;
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+/*=============== TOOLBAR ===================*/
+
+#toolbar {
+    background-color:lightgrey ;
+    width: 100px;
+    height: 100%;
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+}
+
+/*----------------- Color Palet ---------------*/
+
+
+#colorContainer {
+        width: 100%;
+}
+
+.color-selector {
+    width: 40px;
+    height: 40px;
+    background-color: yellow;
+    margin: 2px;
+    padding: 0;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    border-radius: 4px;
+}
+
+#colorSelectorWheel {
+    width: 84px;
+    height: 40px;
+    margin: 4px 0px;
+    border: none;
+    padding: 2px 0;
+    background-color: rgba(100,100,100,0);
+    -moz-box-shadow:    inset 0 0 7px #000000;
+    -webkit-box-shadow: inset 0 0 7px #000000;
+    box-shadow:         inset 0 0 7px #000000;
+    border-radius: 4px;
+}
+
+#colorContainer .selected {
+    border: 2px solid firebrick;
+    margin: 0;
+}
+
+
+/*===============   CANVAS ===================*/
+
+#canvas {
+    margin-left: 100px;
+    background-color: white;
+    -moz-box-shadow:    3px 3px 5px 6px #ccc;
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    box-shadow:         3px 3px 5px 6px #ccc;
+}
+
+.block {
+    width: 5px;
+    height: 5px;
+    /*border: 1px solid black;*/
+}
+
+.row {
+   
+}
+
+/*=============== CANVAS SIZE WINDOW ===================*/
+
+#canvasSizeWindow {
+
+    height: 300px;
+    width: 400px;
+    text-align: center;
+    left: calc(50% - 200px) ;
+    top: calc(50% - 150px);
+    opacity: 1;
+    transition: opacity 0.5s;
+
+    background: rgba(150,150,150,1);
+    border-radius: 35px;
+    box-shadow:
+    inset 0 7em 10em -5em rgba(255,255,255,0.6),
+    0 0.3em 0.5em -0.2em rgba(100,100,100,1),
+    0 1em 2em -0.75em rgba(100,100,100,0.75),
+    0 1em 3em -0.5em rgba(100,100,100,0.5),
+    0 3em 3em -0.25em rgba(100,100,100,0.2);
+}
+
+#canvasSizeHeader {
+    color: white;
+    font-size: 20px;
+    margin-top: 60px;
+}
+
+.inputCanvasSize {
+    margin: 5px;
+    margin-top: 25px;
+    width: 160px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#canvasButton {
+    height: 40px;
+    width: 170px;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 8px;
+    box-shadow: none;
+    color: white;
+    margin-top: 20px;
+}
