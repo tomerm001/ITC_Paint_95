@@ -4,6 +4,7 @@
 var arrayColors = ['rgb(25,23,43)','rgb(34,154,210)','rgb(178,12,200)','rgb(100,100,100)','rgb(25,25,25)','rgb(200,70,120)'];
 var canvasSize = { width: 50, height: 50};
 var selectedColor = "rgb(100,100,100)";
+var canvasArray = [""];
 
 
 
@@ -94,16 +95,42 @@ function updateSelectedColor (e) {
     pressedElement = document.getElementById(pressedElement);
     pressedElement.classList.add("selected");
 
-
 }
+
+//Create Save button
+function generateSaveButton(){
+    //CREATE SAVE BUTTON
+    var newbutton = document.createElement("button");
+    newbutton.id = "saveButton";
+    newbutton.innerHTML = "Save"
+    newbutton.addEventListener("click", saveToStorage);
+
+    var colorContainer = document.getElementById("colorContainer");
+    colorContainer.appendChild(newbutton);
+}
+
+//Create Load button
+function generateLoadButton(){
+    //CREATE Load BUTTON
+    var newbutton = document.createElement("button");
+    newbutton.id = "loadButton";
+    newbutton.innerHTML = "Load"
+    newbutton.addEventListener("click", loadFromStorage);
+
+    var colorContainer = document.getElementById("colorContainer");
+    colorContainer.appendChild(newbutton);
+}
+
+
 
 
 // fucntion to initiate the toolbar
 function initToolbar () {
-    generateToolBar() //generates the actual bar
-    generateColorPallet() //generate the color tools
-    generateColorSelector() // generate color selector
-
+    generateToolBar(); //generates the actual bar
+    generateColorPallet(); //generate the color tools
+    generateColorSelector(); // generate color selector
+    generateSaveButton(); //generate save button
+    generateLoadButton(); //generate load button
 }
 
 // ------------ CANVAS ---------------
@@ -137,7 +164,7 @@ function generateCanvas(dimension_x, dimension_y){
         canvas.appendChild(row);
     }
     
-    //append cancas
+    //append canvas
     var body = document.getElementsByTagName("body");
     body[0].appendChild(canvas);
 
@@ -227,6 +254,90 @@ function adjustCell(e){
     }
 }
 
+//create matrix from current canvas
+function createMatrix () {
+    
+    var amountOfRows = canvasSize.height;
+    var amountOfCollums = canvasSize.width;
+
+    // var newMatrix = [amountOfRows][amountOfCollums];
+    var newMatrix = [];
+  
+
+    //loop through canvas and save all background collors
+    for (var j = 0; j <amountOfRows; j++){
+        
+        var newRow = [];
+
+        for(var i = 0; i < amountOfCollums; i++){
+            var createID = "r" + j + "c"+i;
+            cell = document.getElementById(createID);
+            newRow.push(window.getComputedStyle(cell).getPropertyValue('background-color'));
+        }
+        newMatrix.push(newRow);
+    }
+    canvasArray = newMatrix;   
+}
+
+//read from matrix to canvas 
+function updateCanvasFromMatrix () {
+
+    var matrix = canvasArray;
+
+    var amountOfRows = matrix.length;
+    var amountOfCollums = matrix[0].length;
+
+    //loop through martix and update canvas
+    for (var j = 0; j <amountOfRows; j++){
+        for(var i = 0; i < amountOfCollums; i++){
+            var createID = "r" + j + "c"+i;
+            cell = document.getElementById(createID);
+            cell.style.backgroundColor = matrix[j][i];  
+        }
+    }
+    
+}
+
+//save image to local storage
+function saveToStorage () {
+
+    createMatrix(); //save current canvas to matrix
+
+    var name = prompt("Please provide image name:");
+    localStorage.setItem(name, JSON.stringify(canvasArray));
+
+}
+
+
+//load image from local storage
+
+function loadFromStorage () {
+
+
+    var fileNames = "";
+    //loop throug local storage
+    for(var i = 0; i < localStorage.length; i++){
+        fileNames = fileNames + " | " + localStorage.key(i);
+    }
+    
+    //ask to provide file name to load
+    var fileToLoad = prompt("Please provide file to load:" + fileNames)
+
+    var loaded = localStorage.getItem(fileToLoad);
+    canvasArray = JSON.parse(loaded);
+
+    //read array size
+    var rows = canvasArray.length;
+    var collumns = canvasArray[0].length;
+
+
+    document.getElementById("canvas").remove();
+    generateCanvas(rows, collumns);
+
+    updateCanvasFromMatrix(); //update canvas
+
+
+}
 
 
 
