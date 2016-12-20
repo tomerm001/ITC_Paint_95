@@ -1,7 +1,7 @@
 
 // ---------- GLOBAL VAR  ------------
 
-var arrayColors = ['rgb(25,23,43)','rgb(34,154,210)','rgb(178,12,200)','rgb(100,100,100)','rgb(25,25,25)','rgb(200,70,120)'];
+var arrayColors = ['rgb(25,23,43)','rgb(34,154,210)','rgb(178,12,200)','rgb(100,100,100)','rgb(25,25,25)','rgb(200,70,120)', 'yellow', 'blue', 'green', 'red'];
 var canvasSize = { width: 50, height: 50};
 var selectedColor = "rgb(100,100,100)";
 var canvasArray = [""];

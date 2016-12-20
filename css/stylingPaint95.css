@@ -61,7 +61,7 @@ body {
 
 #saveButton {
     height: 40px;
-    width: 80px;
+    width: 84px;
     padding: 5px;
     font-size: 14px;
     border-radius: 8px;
@@ -69,17 +69,25 @@ body {
     color: white;
     margin-top: 20px;
     background-color: red;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    border: none;
 }
 
 #loadButton {
     height: 40px;
-    width: 80px;
+    width: 84px;
     padding: 5px;
     font-size: 14px;
     border-radius: 8px;
     box-shadow: none;
     color: white;
-    margin-top: 20px;
+    margin-top: 5px;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    border: none;
 }
 
 /*===============   CANVAS ===================*/
@@ -137,6 +145,10 @@ body {
     height: 40px;
     font-size: 16px;
     text-align: center;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    border: none;
 }
 
 #canvasButton {
@@ -148,4 +160,8 @@ body {
     box-shadow: none;
     color: white;
     margin-top: 20px;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    border: none;
 }
