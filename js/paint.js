@@ -115,14 +115,11 @@ function generateLoadButton(){
     var newbutton = document.createElement("button");
     newbutton.id = "loadButton";
     newbutton.innerHTML = "Load"
-    newbutton.addEventListener("click", loadFromStorage);
+    newbutton.addEventListener("click", generateLoadWindow);
 
     var colorContainer = document.getElementById("colorContainer");
     colorContainer.appendChild(newbutton);
 }
-
-
-
 
 // fucntion to initiate the toolbar
 function initToolbar () {
@@ -236,6 +233,62 @@ function hideCanvasWindow () {
 }
 
 
+// ------------ CREATE LOAD WINDOW ---------------
+
+function generateLoadWindow(){
+
+    //create box
+    var window = document.createElement("div");
+    window.id = "canvasSizeWindow";
+    window.style.position = "fixed";
+    window.style.display = "inline-block"
+    
+    //create header
+    var header = document.createElement("p");
+    header.innerHTML = "Please select a file to load";
+    header.id = "textLoad";
+    window.appendChild(header);
+
+    // create drowdown
+    var form = document.createElement("form");
+    form.id = "loadForm";
+    form.name = "loadForm";
+    window.appendChild(form);
+
+    //append to body
+    document.body.appendChild(window);
+
+    var x = document.createElement("input");
+    x.setAttribute("list", "browsers");
+    x.id = "loadInput";
+    document.getElementById("loadForm").appendChild(x);
+
+    var y = document.createElement("datalist");
+    y.setAttribute("id", "browsers");
+    document.getElementById("loadForm").appendChild(y);
+
+
+    //loop and create all elements for list
+
+    var fileList = localStorage;
+
+    for( var i = 0; i < fileList.length; i++){
+        var listItem = document.createElement("option");
+        listItem.setAttribute("value",fileList.key(i));
+        document.getElementById("browsers").appendChild(listItem);
+    }
+
+    //create submit button
+    var newbutton = document.createElement("button");
+    newbutton.id = "loadConfirmButton";
+    newbutton.innerHTML = "Load Image"
+    
+    window.appendChild(newbutton);
+    newbutton.addEventListener("click", loadFromStorage);
+
+}
+
+
 // ------------- FUNCTIONS ------------
 
 function startPaint (e){
@@ -308,21 +361,13 @@ function saveToStorage () {
 
 }
 
-
 //load image from local storage
-
 function loadFromStorage () {
 
+    //get file name from input to load
+    var fileToLoad = document.getElementById('loadInput').value;
 
-    var fileNames = "";
-    //loop throug local storage
-    for(var i = 0; i < localStorage.length; i++){
-        fileNames = fileNames + " | " + localStorage.key(i);
-    }
     
-    //ask to provide file name to load
-    var fileToLoad = prompt("Please provide file to load:" + fileNames)
-
     var loaded = localStorage.getItem(fileToLoad);
     canvasArray = JSON.parse(loaded);
 
@@ -336,9 +381,11 @@ function loadFromStorage () {
 
     updateCanvasFromMatrix(); //update canvas
 
+    //remove loadwindow
+    hideCanvasWindow();
+
 
 }
-
 
 
 // ----------- GLOBAL INIT
