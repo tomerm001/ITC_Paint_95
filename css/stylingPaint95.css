@@ -39,6 +39,15 @@ body {
     -webkit-box-shadow: inset 0 0 10px #000000;
     box-shadow:         inset 0 0 10px #000000;
     border-radius: 4px;
+    transition: 0.5s;
+}
+
+.color-selector:hover {
+    -moz-box-shadow:    inset 0 0 30px #000000;
+    -webkit-box-shadow: inset 0 0 30px #000000;
+    box-shadow:         inset 0 0 30px #000000;
+    transition: 0.5s;
+
 }
 
 #colorSelectorWheel {
@@ -89,6 +98,46 @@ body {
     box-shadow:         inset 0 0 10px #000000;
     border: none;
 }
+
+
+#rotateButton {
+    height: 40px;
+    width: 84px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 8px;
+    box-shadow: none;
+    color: white;
+    margin-top: 5px;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    border: none;
+    transition: 0.5s;
+}
+#rotateButton:hover {
+    transition: 0.5s;
+    background-color: darkgrey;
+}
+
+#rotateButton img {
+    height: 80%;
+}
+
+#slidebar {
+    height: 40px;
+    width: 84px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 8px;
+    box-shadow: none;
+    color: white;
+    margin-top: 5px;
+    border: none;
+    transition: 0.5s;
+
+}
+
 
 /*===============   CANVAS ===================*/
 

@@ -5,6 +5,7 @@ var arrayColors = ['rgb(25,23,43)','rgb(34,154,210)','rgb(178,12,200)','rgb(100,
 var canvasSize = { width: 50, height: 50};
 var selectedColor = "rgb(100,100,100)";
 var canvasArray = [""];
+var newMartix = [];
 
 
 
@@ -97,6 +98,19 @@ function updateSelectedColor (e) {
 
 }
 
+//generate slidebar (NOT COMPLETED)
+function generateSlideBar(){
+    
+    var slidebar = document.createElement("INPUT");
+    slidebar.setAttribute("type", "range");
+    slidebar.id = "slidebar";
+    // colorInput.addEventListener("change", updateSelectedColor);
+    // colorInput.addEventListener("click", updateSelectedColor);
+    
+    var toolbar = document.getElementById("toolbar");
+    toolbar.appendChild(slidebar);
+}
+
 //Create Save button
 function generateSaveButton(){
     //CREATE SAVE BUTTON
@@ -121,11 +135,26 @@ function generateLoadButton(){
     colorContainer.appendChild(newbutton);
 }
 
+//create turn button
+function generateRotateButton () {
+    var newbutton = document.createElement("button");
+    newbutton.id = "rotateButton";
+    newbutton.innerHTML = '<img src="https://cdn.pixabay.com/photo/2015/08/14/15/15/update-888512_960_720.png" />';
+    newbutton.addEventListener("click", rotateImage);
+
+    var toolbar = document.getElementById("toolbar");
+    colorContainer.appendChild(newbutton);
+
+}
+
+
 // fucntion to initiate the toolbar
 function initToolbar () {
     generateToolBar(); //generates the actual bar
     generateColorPallet(); //generate the color tools
     generateColorSelector(); // generate color selector
+    // generateSlideBar(); //generate slidebar (NOT COMPLETED)
+    generateRotateButton() // generate rotate button
     generateSaveButton(); //generate save button
     generateLoadButton(); //generate load button
 }
@@ -375,9 +404,12 @@ function loadFromStorage () {
     var rows = canvasArray.length;
     var collumns = canvasArray[0].length;
 
+    canvasSize.width = collumns;
+    canvasSize.height = rows;
+
 
     document.getElementById("canvas").remove();
-    generateCanvas(rows, collumns);
+    generateCanvas(collumns, rows);
 
     updateCanvasFromMatrix(); //update canvas
 
@@ -387,6 +419,81 @@ function loadFromStorage () {
 
 }
 
+//Create new Matrix of zeros and rotate current one
+function rotateMatrix(canvasArray){
+
+    var currentMatrix = canvasArray;
+    var newRotatedMatrix = [];
+
+    var currentAmountOfRows = canvasArray.length; //j
+    var currentAmountOfColl = canvasArray[0].length; //i
+
+    //create new rotated empty array
+    var newAmountOfRows = currentAmountOfColl; 
+    var newAmountOfColl = currentAmountOfRows;
+
+    for(var i = 0; i < newAmountOfRows; i++){
+        
+        var newRow = [];
+        for(var j = 0; j < newAmountOfColl; j++){
+            newRow.push("0");
+        }
+        newRotatedMatrix.push(newRow);
+    }
+
+
+    //populate new array i row and j coll of new array
+    for (var i = 0; i < newAmountOfRows; i++){
+        for (var j = 0; j < newAmountOfColl; j ++){
+
+            newRotatedMatrix[i][j] = currentMatrix[(newAmountOfColl-1)-j][i];
+
+        }
+
+    }
+
+    return newRotatedMatrix;
+}
+
+//rotate image make use of rotate Matrix
+function rotateImage () {
+
+    //save current image to array
+    createMatrix();
+
+    //create new rotated matrix
+    var rotatedMatrix = rotateMatrix(canvasArray);
+
+    //update canvas array
+    canvasArray = rotatedMatrix;
+    canvasSize.height = canvasArray.length;
+    canvasSize.width = canvasArray[0].length;
+
+    //remove current canvas
+    document.getElementById("canvas").remove();
+
+    //create new canvas
+    generateCanvas(canvasSize.width, canvasSize.height)
+
+    //update canvas with new matrix
+    updateCanvasFromMatrix();
+}
+
+//zoom in and zoomout
+function zoomFunction(zoomNumber){
+
+    // switch(zoomNumber){
+
+    //     document.getElementsByClassName("block");
+
+
+    //     case 1: 
+
+
+    //     case 2:
+
+    // }
+}
 
 // ----------- GLOBAL INIT
 
